@@ -48,24 +48,56 @@ kernel, módulos, portabilidad, etc.
   * Para corregir bugs y asegurar mayor seguridad.
 
 7. ¿Cuáles son las distintas opciones para realizar la configuración de opciones de compilación de un kernel? Cite diferencias, necesidades (paquetes adicionales de software que se pueden requerir), pro y contras de cada una de ellas.
+***
+  Para configurar el kernel, se utiliza el archivo .config que reside en el directiorio raiz del kernel. Este mismo contiene las instrucciones que el kernel debe compilar.
+  Para compilar el kernel hay 3 interfaces que ayudan al proceso:
+  * make config -> tediosa, muy manual con entrada de texto.
+  * make xconfig -> interfaz grafica, con cosas de ventana, no todos los SO lo tienen integrado.
+  * make menuconfig -> la mejor opcion y la mas usada, utiliza `ncurses`, una libreria que permite generar una interfaz con paneles desde la terminal.
+  Modulos:
+  Es un fragmento de codigo que puede cargarse y descargarse en el mapa de la memoria del SO(Kernel) bajo demanda.
+  Permite extender la funcionalidad del kernel sin la necesidad de reinciar el sistema.
+  Todo su codigo se ejecuta en modo kernel.
+  no se que mas poner.
+
 
 8. Nombre al menos 5 opciones de las más importantes que encontrará al momento de realizar la configuración de un kernel para su posterior compilación.
+***
+  creo que lo nombre en la pregunta anterior.
 
 9. Indique que tarea realiza cada uno de los siguientes comandos durante la tarea de configu- ración/compilación del kernel:
-  a. make menuconfig 
+***
+  a. make menuconfig
+  Utiliza `ncurses`, una libreria que permite generar una interfaz con paneles desde la terminal.
   b. make clean
+  El comando clean borra todos los objetos o archivos previamentes compilados.
   c. make (investigue la funcionalidad del parámetro -j)
+  Indica el numero de jobs o threds a utilizar.
   d. make modules (utilizado en antiguos kernels, actualmente no es necesario)
-  e. make modules_install 
+  Compila archivos individuales para cada pregunta que hayas respondido M durante la configuracion del kernel. El objeto codificado el linkeado contra el kernel recien construido. (para las preguntas respondidas en Y, estas ya son parte del vmlinuz, y para preguntas respondidas como N estas se saltean)
+  e. make modules_install
+  Instala tus modulos de kernel en lib/modules o lib/modules/<version>
   f. make install
+  instala tu kernel construido en /vmlinuz
 
 10. Una vez que el kernel fue compilado, ¿dónde queda ubicada su imagen? ¿dónde debería ser
 reubicada? ¿Existe algún comando que realice esta copia en forma automática?
+  Al terminar el proceso de compilacion, la imagen del kernel quedara ubicada en `directorio-del-codigo/arch/arquitectura/boot/.`
+  El resto no tengo idea.
 
-11. ¿A qué hace referencia el archivo initramfs? ¿Cuál es su funcionalidad? ¿Bajo qué condi- ciones puede no ser necesario?
+11. ¿A qué hace referencia el archivo initramfs? ¿Cuál es su funcionalidad? ¿Bajo qué condiciones puede no ser necesario?
+  Es un archivo cpio (copia entrada y salida) de el archivo inicial del file System que se carga en memoria durante el startup de linux.
+  El programa init esta pensado para completar algunas tareas antes que el archivo root file system real o final sea montado en rootfs.
+  Ni idea con lo de la tercera pregunta.
 
 12. ¿Cuál es la razón por la que una vez compilado el nuevo kernel, es necesario reconfigurar el gestor de arranque que tengamos instalado?
+  Porque el directorio al que apunta el gestor de arranque probablemente apunte al kernel que teniamos previo.
 
 13. ¿Qué es un módulo del kernel? ¿Cuáles son los comandos principales para el manejo de módulos del kernel?
+  Lo explique en un punto anterior sin saber que lo iban a preguntar aca. Por lo tanto, esa pregunta es muy probable que la responde mal jajaja
 
 14. ¿Qué es un parche del kernel? ¿Cuáles son las razones principales por las cuáles se deberían aplicar parches en el kernel? ¿A través de qué comando se realiza la aplicación de parches en el kernel?
+  Es un metodo que permite aplicar actualizaciones no incremetales sobre la base del kernel.
+  Se basa en archivos diff (archivos de diferencia) que indican que agragar y que quitar.
+  Permiten agregar funcionalidad (nuevos drivers, correcciones menores) Esto es util porque a veces conviene descargar el archivo de diferencia en vez de descargar toda la nueva version completa.
+  
