@@ -146,6 +146,7 @@ Estos archivos representan lo que se conoce como loop device. Básicamente son a
         ```
 
    4. ¿Puede explicar qué sucedió? Nota: si estás usando la máquina virtual de la cátedra, el comportamiento esperado es que los comandos anteriores fallen.
+   
         Imagino que falla porque no poseo los modulos que necesito para que el sistema pueda montar esas extenciones. Y por eso falla sin saber que hacer.
 
 3. Descargue el código fuente del kernel a compilar, el parche correspondiente a la versión a la que se quiere llevar el código fuente, arme la estructura de directorios y aplique el parche (en la máquina virtual provista por la cátedra se encuentran en el directorio /usr/src).  
