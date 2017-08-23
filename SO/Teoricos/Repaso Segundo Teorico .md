@@ -3,10 +3,12 @@
 ## Segundo Parcial Teórico Repaso
 1. Los KLT, en un ambiente multiprocesador, pueden ejecutarse en distintos procesadores.
 
+		VERDADERO
+
 ***
 1. En multiprocesadores, en la organización maestro esclavo, una syscall puede ser atendida en cualquiera de los procesadores.  
 
-		FALSO. -> Todas las syscall se redirigen a un mismo procesador (el maestro) y el resto de los procesadores (esclavos) corren procesos de usuario.
+		FALSO -> Todas las syscall se redirigen a un mismo procesador (el maestro) y el resto de los procesadores (esclavos) corren procesos de usuario.
 2. En multiprocesadores, si cada CPU tiene su SO es posible que una CPU este saturada y otras sin trabajo productivo.  
 
 		VERDADERO -> al tener cada CPU su conjunto de procesos, se produce un desbalance de cargas de trabajo.
@@ -23,7 +25,7 @@
 		FALSO -> La planificacion tiene que ser adaptada para optimizar la utilizacion en multiples procesadores en vez de uno solo.
 		6. En un sistema distribuido, todos los SO de las diferentes computadoras que participan deben ser iguales.
 
-		FALSO -> Al ser distribuidos, no es necesario que los SO sean los mismos pero si hace falta que compartan algun protocolo de comunicacion, de manera que puedan entenderse entre ellas.
+		FALSO -> Al ser distribuidos, no es necesario que los SO sean los mismos pero si hace falta que compartan algun protocolo de comunicacion, de manera que puedan entenderse entre ellas. En este caso es un MIDDLEWARE lo que hace que puedan ser diferentes SO.
 		7. En las multicomputadoras, cada CPU tiene su memoria.
 
 		VERDADERO -> Una multicomputadora, son varios pares CPU-memoria interconectados pasandose mensajes.
@@ -31,14 +33,14 @@
   
 		a. Memoria Compartida X -> ! no tienen memoria compartida
  		b. Pasajes de Mensajes O -> Correcta.
- 		c. RPC  X
+ 		c. RPC  X -> puede ser este, pero la base es pasaje de mensajes.
  		d. Ninguna X
  		 		9. En multicomputadoras, cada nodo puede correr un SO diferente.
 
-		VERDADERO. -> se maneja por mensajes, solo necesita que el protocolo se respete entre las diferentes computadoras.
-		10. Las computadoras que forman una Grid deben ser todas iguales
+		FALSO -> tienen que ser el mismo.
+				10. Las computadoras que forman una Grid deben ser todas iguales
 
-		DUDOSO -> En el power no menciona Grids en ningun lado, y hay muchos tipos de computadoras conectadas en forma de grid. Deberia ser mas especifico para saber a que se refiere.
+		FALSO
 		
 		Segun Wiki:
 		Grid computing is the collection of computer resources from multiple locations to reach a common goal. The grid can be thought of as a distributed system with non-interactive workloads that involve a large number of files. Grid computing is distinguished from conventional high performance computing systems such as cluster computing in that grid computers have each node set to perform a different task/application. Grid computers also tend to be more heterogeneous and geographically dispersed (thus not physically coupled) than cluster computers.[1] Although a single grid can be dedicated to a particular application, commonly a grid is used for a variety of purposes. Grids are often constructed with general-purpose grid middleware software libraries. 
@@ -59,19 +61,21 @@
 		13. En el formato ELF, los segmentos indican “como” ejecutar un programa.
 
 		VERADERO
+		Y las secciones indican como crear el ELF.
 		14. En el formato ELF, un segmento puede contener varias secciones.
 
 		VERDADERO -> An object file segment contains one or more sections.
 		15. En el formato ELF, las secciones tienen un flag que indica si la misma es de lectura o escritura.
-
+		
+		VERDADERO
 		DUDOSO -> Las secciones TIENEN un FLAG, y el mismo puede indicar varias cosas. Entre ellas hay una que se llama WRITE, que especifica:
 		"SHF_WRITE The section contains data that should be writable during process execution."
 		16. En el formato ELF, un símbolo solo representa el nombre de una variable.
 
-		FALSO -> Nos permite relacionar la direccion de memoria con el valor del programa.
+		FALSO -> Nos permite relacionar la direccion de memoria con el valor del programa. Si no tuviera la palabra 'solo' podria ser verdadero.
 		17. En el formato PE, existe una sección que indica que símbolos de otros archivos PE son utilizados.
 
-		VERDADERO -> La seccion de exports, contiene informacion de codigos o datos que pueden ser exportados desde el archivo. Se tratan de nombres de variables o funciones que pueden ser referenciados desde otros PE Los elementos que se exportan se denominan 'simbolos'.
+		VERDADERO -> La seccion de imports, contiene informacion de codigos o datos que pueden ser importados a el archivo. Se tratan de nombres de variables o funciones que pueden ser referenciados desde otros PE Los elementos que se exportan se denominan 'simbolos'.
 		18. El formato PE permite incluir imágenes dentro del archivo.
 
 		DUDOSO -> No encontre nada que diga que esto sea verdadero asi que lo tomo por falso.
@@ -83,7 +87,7 @@
 		FALSO -> segun wikipedia: "...the .text section (which holds program code)..."
 		21. Un dominio define el conjunto de objetos a proteger.
 
-		VERDADERO -> Un dominio es un conjunto de pares {Objeto, Derecho} cada par especifica un objeto y un subconjunto de operaciones que se pueden realizar con el.
+		FALSO -> Un dominio es un conjunto de pares {Objeto, Derecho} cada par especifica un objeto y un subconjunto de operaciones que se pueden realizar con el.
 		22. Dentro de un sistema existen diferentes dominios.
 
 		VERDADERO -> hay muchos dominios dentro de los cuales se ejecutan los procesos.
@@ -93,22 +97,24 @@
 		
 24. El derecho copy se asocia a un objeto, y permite que un proceso en ese dominio pueda copiar los derechos de ese objeto dentro de su columna.
 
+		**VARDADERO**
 		DUDOSO -> en principio la parte de que 'permite que un proceso en ese dominio pueda copiar los derechos de ese objeto dentro de su columna' es verdad. Pero en la diapo aparece como que el derecho copy se asocia a un elemento access (i,j) de la matriz, y no 'a un objeto'.
 		25. Switch es una operación entre dominios.
 
-		VERDADERO -> Para poder cambiar de un dominio a otro se debe habilitar la operación switch sobre un objeto.
+		VERDADERO -> Para poder cambiar de un dominio a otro se debe habilitar la operación switch sobre un objeto. (Ej: SUDO)
 		26. El derecho de copia se puede transferir.
 
 		VERDADERO -> Transferencia: si un derecho se copia desde matriz(i,j) a matriz(k,j), el derecho desaparece para matriz(i,j), o sea, el derecho fue transferido.
 		27. Con el derecho owner, un proceso en ese dominio puede agregar o borrar cualquier entrada dentro de su columna.
 
-		CREO QUE ES FALSO -> Si matriz(i,j) incluye el derecho de owner entonces un proceso ejecutándose en el dominio Di puede agregar y borrar cualquier entrada en la columna j.
+		VERDADERO -> Si matriz(i,j) incluye el derecho de owner entonces un proceso ejecutándose en el dominio Di puede agregar y borrar cualquier entrada en la columna j.
 		28. Control es aplicable sólo a dominios.
 
 		VERDADERO
 		
 29. Un proceso en el dominio i puede remover cualquier derecho del j, si tiene habilitada la operación control en su dominio.
-
+		
+		**VERDADERO**
 		DUDOSO -> es VERDADERO si la matriz es (i,j). porque: "Si matriz (i,j) incluye el derecho de control, entonces un proceso ejecutándose en el dominio Di puede remover cualquier derecho de acceso dentro de la fila j." Si la matriz no es asi, entonces es FALSO.
 		30. Cada objeto puede implementarse como una Lista de acceso.
 
@@ -118,9 +124,10 @@
 		FALSO -> Primero las politicas, luego los mecanismos.
 		32. La privacidad es el derecho de cada individuo a proteger su información.
 
-		VERDADERO (supongo, no lo encontre en las diapos)33. La privacidad y la confidencialidad son lo mismo.
+		VERDADERO (supongo, no lo encontre en las diapos)
+		33. La privacidad y la confidencialidad son lo mismo.
 
-		CREO QUE FALSO -> yo diría qeu la privacidad es lo anterior, y lo confidencial es informacion sensible, que por alguna razon no debe ser expuesta al publico general y debe ser protegida de alguna manera.
+		FALSO -> yo diría qeu la privacidad es lo anterior, y lo confidencial es informacion sensible, que por alguna razon no debe ser expuesta al publico general y debe ser protegida de alguna manera.
 		34. La identificación y la autenticación son sinónimos.
 
 		FALSO -> Identificarse hace referencia a decir quien somos, y autenticarse hace referencia a demostrar que somos quien decimos ser.
@@ -132,9 +139,11 @@
 		FALSO -> es una amenaza a la Integridad de los datos.
 		37. La invención es una amenaza a la integridad.
 
+		**VERDADERO**
 		FALSO -> igual creo que se equivocaron de palabra diciendo 'invención'
-		38. El desbordamiento de buffer se puede prevenir declarando ese buffer como de sololectura.
-
+		38. El desbordamiento de buffer se puede prevenir declarando ese buffer como de solo lectura.
+		
+		**VERDADERO -> pero no tiene sentido**
 		NI IDEA. Si declaras un buffer como solo lectura, como lo usas como buffer??
 		39. ¿Cuál es el problema de permitir ejecución en una pila?
 
